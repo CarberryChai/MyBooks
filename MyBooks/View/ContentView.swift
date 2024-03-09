@@ -75,6 +75,7 @@ extension ContentView {
 }
 
 #Preview {
-    ContentView()
-        .modelContainer(for: Book.self, inMemory: true)
+    let preview = Preview(Book.self)
+    preview.addExamples(Book.sampleBooks)
+    return ContentView().modelContainer(preview.container)
 }

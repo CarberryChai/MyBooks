@@ -44,6 +44,7 @@ struct DetailBook: View {
 }
 
 #Preview {
-    ContentView()
-        .modelContainer(for: Book.self, inMemory: true)
+    let preview = Preview(Book.self)
+    return DetailBook(book: Book.sampleBooks[4])
+        .modelContainer(preview.container)
 }

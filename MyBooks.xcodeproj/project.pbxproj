@@ -14,6 +14,8 @@
 		78AABD462B9BEA1F00E604F8 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AABD452B9BEA1F00E604F8 /* Book.swift */; };
 		78AABD4A2B9BF0FF00E604F8 /* DetailBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AABD492B9BF0FF00E604F8 /* DetailBook.swift */; };
 		78AABD4C2B9C388B00E604F8 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AABD4B2B9C388B00E604F8 /* RatingView.swift */; };
+		78AABD4E2B9C841700E604F8 /* BookSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AABD4D2B9C841700E604F8 /* BookSamples.swift */; };
+		78AABD502B9C860A00E604F8 /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AABD4F2B9C860A00E604F8 /* PreviewContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		78AABD452B9BEA1F00E604F8 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		78AABD492B9BF0FF00E604F8 /* DetailBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBook.swift; sourceTree = "<group>"; };
 		78AABD4B2B9C388B00E604F8 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		78AABD4D2B9C841700E604F8 /* BookSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSamples.swift; sourceTree = "<group>"; };
+		78AABD4F2B9C860A00E604F8 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				78AABD3E2B9BE9C200E604F8 /* Preview Assets.xcassets */,
+				78AABD4D2B9C841700E604F8 /* BookSamples.swift */,
+				78AABD4F2B9C860A00E604F8 /* PreviewContainer.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -166,6 +172,8 @@
 				78AABD3A2B9BE9BF00E604F8 /* ContentView.swift in Sources */,
 				78AABD382B9BE9BF00E604F8 /* MyBooksApp.swift in Sources */,
 				78AABD4C2B9C388B00E604F8 /* RatingView.swift in Sources */,
+				78AABD4E2B9C841700E604F8 /* BookSamples.swift in Sources */,
+				78AABD502B9C860A00E604F8 /* PreviewContainer.swift in Sources */,
 				78AABD462B9BEA1F00E604F8 /* Book.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
