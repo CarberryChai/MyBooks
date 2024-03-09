@@ -22,12 +22,7 @@ struct ContentView: View {
                         ForEach(books) { book in
                             bookRow(book)
                         }
-                        .onDelete { indexSet in
-                            indexSet.forEach { index in
-                                let item = books[index]
-                                viewContext.delete(item)
-                            }
-                        }
+                        .onDelete(perform: deleteBooks)
                     }
                     .listStyle(.plain)
                 }
@@ -50,14 +45,18 @@ struct ContentView: View {
         viewContext.insert(newBook)
         path.append(newBook)
     }
+
+    private func deleteBooks(offsets: IndexSet) {
+        for index in offsets {
+            viewContext.delete(books[index])
+        }
+    }
 }
 
 extension ContentView {
     @ViewBuilder
     func bookRow(_ book: Book) -> some View {
-        NavigationLink {
-            Text(book.title)
-        } label: {
+        NavigationLink(value: book) {
             HStack(spacing: 10) {
                 book.icon
                 VStack(alignment: .leading) {
