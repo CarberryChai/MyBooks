@@ -11,9 +11,9 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.modelContext) private var viewContext
     @Query(sort: \Book.title) private var books: [Book]
-    @State private var createNewBook = false
+    @State private var path = NavigationPath()
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             Group {
                 if books.isEmpty {
                     ContentUnavailableView("Enter your book.", systemImage: "book.fill")
@@ -33,19 +33,22 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("My Books")
+            .navigationDestination(for: Book.self, destination: { book in
+                DetailBook(book: book)
+            })
             .toolbar {
-                Button(action: {
-                    createNewBook = true
-                }, label: {
+                Button(action: addNewBook) {
                     Image(systemName: "plus.circle.fill")
                         .imageScale(.large)
-                })
-            }
-            .sheet(isPresented: $createNewBook) {
-                NewBookView()
-                    .presentationDetents([.medium])
+                }
             }
         }
+    }
+
+    private func addNewBook() {
+        let newBook = Book(title: "", author: "")
+        viewContext.insert(newBook)
+        path.append(newBook)
     }
 }
 
@@ -64,14 +67,8 @@ extension ContentView {
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
-                if let rating = book.rating {
-                    HStack {
-                        ForEach(1 ... rating, id: \.self) { _ in
-                            Image(systemName: "star.fill")
-                                .imageScale(.small)
-                                .foregroundColor(.yellow)
-                        }
-                    }
+                if book.rating > 0 {
+                    StaticRatingView(rating: book.rating)
                 }
             }
         }
