@@ -38,6 +38,13 @@ struct DetailBook: View {
                 Text("Recommended By :")
             }
 
+            NavigationLink {
+                QuotesListView(book: book)
+            } label: {
+                Text("Quotes")
+            }
+
+
             Section(header: Text("Synopsis")) {
                 TextEditor(text: $book.synopsis)
                     .frame(height: 200)

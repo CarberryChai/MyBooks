@@ -22,6 +22,7 @@ class Book {
     var status: Status.RawValue
     // when you want to add a new attribute, you can use optional type or use the default value
     var recomendedBy: String = ""
+    var quotes: [Quote]?
 
     init(
         title: String,
