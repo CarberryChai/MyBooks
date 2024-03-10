@@ -15,9 +15,13 @@ class Book {
     var dateAdded: Date
     var dateStarted: Date
     var dateCompleted: Date
-    var summary: String
+    // when you want to use a different name for this attribute, use the @Attribute(originalName:) to do a light imigration
+    @Attribute(originalName: "summary")
+    var synopsis: String
     var rating: Int
     var status: Status.RawValue
+    // when you want to add a new attribute, you can use optional type or use the default value
+    var recomendedBy: String = ""
 
     init(
         title: String,
@@ -25,18 +29,20 @@ class Book {
         dateAdded: Date = .now,
         dateStarted: Date = .distantPast,
         dateCompleted: Date = .distantPast,
-        summary: String = "",
+        synopsis: String = "",
         rating: Int = 0,
-        status: Status = .OnShelf
+        status: Status = .OnShelf,
+        recomendedBy: String = ""
     ) {
         self.title = title
         self.author = author
         self.dateAdded = dateAdded
         self.dateStarted = dateStarted
         self.dateCompleted = dateCompleted
-        self.summary = summary
+        self.synopsis = synopsis
         self.rating = rating
         self.status = status.rawValue
+        self.recomendedBy = recomendedBy
     }
 
     var icon: Image {

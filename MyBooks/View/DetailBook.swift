@@ -32,9 +32,14 @@ struct DetailBook: View {
                 Text("Rating")
             }
 
+            LabeledContent {
+                TextField("name", text: $book.recomendedBy)
+            } label: {
+                Text("Recommended By :")
+            }
 
-            Section(header: Text("Summary")) {
-                TextEditor(text: $book.summary)
+            Section(header: Text("Synopsis")) {
+                TextEditor(text: $book.synopsis)
                     .frame(height: 200)
             }
         }
