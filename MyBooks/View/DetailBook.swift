@@ -15,14 +15,14 @@ struct DetailBook: View {
             TextField("Author", text: $book.author)
             Picker("Status", selection: $book.status) {
                 ForEach(Status.allCases) { status in
-                    Text(status.description).tag(status)
+                    Text(status.description).tag(status.rawValue)
                 }
             }
             DatePicker("Date Added", selection: $book.dateAdded, displayedComponents: .date)
-            if book.status == .InProgress || book.status == .Completed {
+            if Status(rawValue: book.status) == .InProgress || Status(rawValue: book.status) == .Completed {
                 DatePicker("Date Started", selection: $book.dateStarted, in: book.dateAdded...Date.now, displayedComponents: .date)
             }
-            if book.status == .Completed {
+            if Status(rawValue: book.status) == .Completed {
                 DatePicker("Date Completed", selection: $book.dateCompleted, in: book.dateStarted...Date.now, displayedComponents: .date)
             }
 

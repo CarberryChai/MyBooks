@@ -8,35 +8,39 @@
 import SwiftData
 import SwiftUI
 
+enum SortOrder: String, CaseIterable, Identifiable {
+    case title, author, status
+    var id: Self { self }
+}
+
 struct ContentView: View {
     @Environment(\.modelContext) private var viewContext
-    @Query(sort: \Book.title) private var books: [Book]
     @State private var path = NavigationPath()
+    @State private var sortBy: SortOrder = .status
+    @State private var filter = ""
     var body: some View {
         NavigationStack(path: $path) {
-            Group {
-                if books.isEmpty {
-                    ContentUnavailableView("Enter your book.", systemImage: "book.fill")
-                } else {
-                    List {
-                        ForEach(books) { book in
-                            bookRow(book)
-                        }
-                        .onDelete(perform: deleteBooks)
+            HStack {
+                Spacer()
+                Picker("", selection: $sortBy) {
+                    ForEach(SortOrder.allCases) {
+                        Text($0.rawValue.capitalized)
+                            .tag($0)
                     }
-                    .listStyle(.plain)
                 }
             }
-            .navigationTitle("My Books")
-            .navigationDestination(for: Book.self, destination: { book in
-                DetailBook(book: book)
-            })
-            .toolbar {
-                Button(action: addNewBook) {
-                    Image(systemName: "plus.circle.fill")
-                        .imageScale(.large)
+            BookListView(sortOrder: sortBy, filterString: filter)
+                .searchable(text: $filter, prompt: Text("Filter on title or author"))
+                .navigationTitle("My Books")
+                .navigationDestination(for: Book.self, destination: { book in
+                    DetailBook(book: book)
+                })
+                .toolbar {
+                    Button(action: addNewBook) {
+                        Image(systemName: "plus.circle.fill")
+                            .imageScale(.large)
+                    }
                 }
-            }
         }
     }
 
@@ -44,33 +48,6 @@ struct ContentView: View {
         let newBook = Book(title: "", author: "")
         viewContext.insert(newBook)
         path.append(newBook)
-    }
-
-    private func deleteBooks(offsets: IndexSet) {
-        for index in offsets {
-            viewContext.delete(books[index])
-        }
-    }
-}
-
-extension ContentView {
-    @ViewBuilder
-    func bookRow(_ book: Book) -> some View {
-        NavigationLink(value: book) {
-            HStack(spacing: 10) {
-                book.icon
-                VStack(alignment: .leading) {
-                    Text(book.title)
-                        .font(.headline)
-                    Text(book.author)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-                if book.rating > 0 {
-                    StaticRatingView(rating: book.rating)
-                }
-            }
-        }
     }
 }
 
