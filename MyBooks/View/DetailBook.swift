@@ -41,7 +41,8 @@ struct DetailBook: View {
             NavigationLink {
                 QuotesListView(book: book)
             } label: {
-                Text("Quotes")
+                let count = book.quotes?.count ?? 0
+                Label("^[\(count) Quotes](inflect:true)", systemImage: "quote.opening")
             }
 
 

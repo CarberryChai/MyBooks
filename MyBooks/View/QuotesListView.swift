@@ -13,48 +13,90 @@ struct QuotesListView: View {
     let book: Book
     @State private var page = ""
     @State private var text = ""
+    @State private var selectedQuote: Quote?
+    private var isSelecting: Bool {
+        selectedQuote != nil
+    }
+
     var body: some View {
         Form {
             Section(header: Text("Add Quote")) {
-               LabeledContent {
-                    TextField("#Page", text: $page)
+                LabeledContent {
+                    TextField("Page#", text: $page)
                 } label: {
                     Text("Page")
                 }
                 TextEditor(text: $text)
                     .frame(height: 100)
 
-                Button("Create") {
-                    let quote = Quote(text: text, page: page)
-                    book.quotes?.append(quote)
-                    page = ""
-                    text = ""
+                HStack {
+                    if isSelecting {
+                        Button("Cancel") {
+                            page = ""
+                            text = ""
+                            selectedQuote = nil
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                    Spacer()
+                    Button("\(isSelecting ? "Update" : "Create")") {
+                        createOrUpdateQuote()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(text.isEmpty)
                 }
             }
             Section(header: Text("Quotes")) {
                 if let quotes = book.quotes {
                     ForEach(quotes) { quote in
                         VStack(alignment: .leading) {
+                            Text(quote.created, format: .dateTime.day().month().year())
+                                .font(.caption)
+                                .foregroundColor(.secondary)
                             Text(quote.text)
-                            if let page = quote.page {
-                                Text("Page: \(page)")
-                                    .font(.caption)
+                            HStack {
+                                Spacer()
+                                if let page = quote.page {
+                                    Text("Page: \(page)")
+                                        .font(.caption)
+                                }
                             }
+                        }
+                        .contentShape(.rect)
+                        .onTapGesture {
+                            selectedQuote = quote
+                            page = quote.page ?? ""
+                            text = quote.text
                         }
                     }
                     .onDelete(perform: { indexSet in
                         for index in indexSet {
                             let quote = quotes[index]
-                            book.quotes?.forEach({ q in
+                            book.quotes?.forEach { q in
                                 if q.id == quote.id {
                                     context.delete(quote)
                                 }
-                            })
+                            }
                         }
                     })
                 }
             }
         }
+        .navigationTitle("Quotes")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+
+    func createOrUpdateQuote() {
+        if isSelecting {
+            selectedQuote?.page = page
+            selectedQuote?.text = text
+            selectedQuote = nil
+        } else {
+            let quote = page.isEmpty ? Quote(text: text) : Quote(text: text, page: page)
+            book.quotes?.append(quote)
+        }
+        page = ""
+        text = ""
     }
 }
 
@@ -62,6 +104,8 @@ struct QuotesListView: View {
     let preview = Preview(Book.self)
     let books = Book.sampleBooks
     preview.addExamples(books)
-    return QuotesListView(book: books[2])
-        .modelContainer(preview.container)
+    return NavigationStack {
+        QuotesListView(book: books[2])
+            .modelContainer(preview.container)
+    }
 }
