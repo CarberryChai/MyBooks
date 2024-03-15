@@ -42,6 +42,9 @@ struct BookListView: View {
                 .listStyle(.plain)
             }
         }
+        .navigationDestination(for: Book.self, destination: { book in
+            DetailBook(book: book)
+        })
     }
 
     private func deleteBooks(offsets: IndexSet) {
@@ -62,6 +65,15 @@ extension BookListView {
                     Text(book.author)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
+                    if let genres = book.genres {
+                        ViewThatFits(in:.horizontal) {
+                            GenresStack(genres: genres)
+                            ScrollView(.horizontal) {
+                                GenresStack(genres: genres)
+                            }
+                            .scrollIndicators(.hidden)
+                        }
+                    }
                 }
                 if book.rating > 0 {
                     StaticRatingView(rating: book.rating)

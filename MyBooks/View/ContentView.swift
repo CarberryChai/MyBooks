@@ -32,9 +32,6 @@ struct ContentView: View {
             BookListView(sortOrder: sortBy, filterString: filter)
                 .searchable(text: $filter, prompt: Text("Filter on title or author"))
                 .navigationTitle("My Books")
-                .navigationDestination(for: Book.self, destination: { book in
-                    DetailBook(book: book)
-                })
                 .toolbar {
                     Button(action: addNewBook) {
                         Image(systemName: "plus.circle.fill")

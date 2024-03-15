@@ -38,28 +38,44 @@ struct DetailBook: View {
                 Text("Recommended By :")
             }
 
-            NavigationLink {
-                QuotesListView(book: book)
-            } label: {
-                let count = book.quotes?.count ?? 0
-                Label("^[\(count) Quotes](inflect:true)", systemImage: "quote.opening")
-            }
-
-            NavigationLink {
-                GenresView(book: book)
-            } label: {
-                let count = book.genres?.count ?? 0
-                Label("^[\(count) Genres](inflect:true)", systemImage: "tag")
-            }
-
-
             Section(header: Text("Synopsis")) {
                 TextEditor(text: $book.synopsis)
                     .frame(height: 200)
             }
+
+            if let genres = book.genres {
+                ViewThatFits(in:.horizontal) {
+                    GenresStack(genres: genres)
+                    ScrollView(.horizontal) {
+                        GenresStack(genres: genres)
+                    }
+                    .scrollIndicators(.hidden)
+                }
+            }
         }
         .navigationTitle("New Book")
         .navigationBarTitleDisplayMode(.inline)
+        .safeAreaInset(edge: .bottom) {
+            HStack(spacing: 50) {
+                NavigationLink {
+                    QuotesListView(book: book)
+                } label: {
+                    let count = book.quotes?.count ?? 0
+                    Label("^[\(count) Quotes](inflect:true)", systemImage: "quote.opening")
+                }
+
+                NavigationLink {
+                    GenresView(book: book)
+                } label: {
+                    let count = book.genres?.count ?? 0
+                    Label("^[\(count) Genres](inflect:true)", systemImage: "tag")
+                }
+            }
+            .padding(.vertical)
+            .frame(maxWidth: .infinity)
+            .background(.ultraThinMaterial)
+            .buttonStyle(.bordered)
+        }
     }
 }
 
@@ -69,7 +85,7 @@ struct DetailBook: View {
     let genres = Genre.samples
     preview.addExamples(books)
     preview.addExamples(genres)
-   // books[4].genres?.append(genres[0])
+    // books[4].genres?.append(genres[0])
     return NavigationStack {
         DetailBook(book: books[4])
             .modelContainer(preview.container)
