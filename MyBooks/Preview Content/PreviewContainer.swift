@@ -22,7 +22,7 @@ struct Preview {
 
     func addExamples(_ examples: [some PersistentModel]) {
         Task { @MainActor in
-            examples.forEach { example in
+            for example in examples {
                 container.mainContext.insert(example)
             }
         }

@@ -22,7 +22,11 @@ class Book {
     var status: Status.RawValue
     // when you want to add a new attribute, you can use optional type or use the default value
     var recomendedBy: String = ""
+    @Relationship(deleteRule: .cascade)
     var quotes: [Quote]?
+
+    @Relationship(inverse:\Genre.books)
+    var genres: [Genre]?
 
     init(
         title: String,
@@ -66,4 +70,16 @@ enum Status: Int, Codable, Identifiable, CaseIterable {
         case .Completed: return "Completed"
         }
     }
+}
+
+
+struct BookMigrationPlan: SchemaMigrationPlan {
+    static var schemas: [any VersionedSchema.Type] = [BooksVersionedSchema.self]
+
+    static var stages: [MigrationStage] = []
+}
+
+struct BooksVersionedSchema: VersionedSchema {
+    static let models: [any PersistentModel.Type] = [Book.self]
+    static let versionIdentifier: Schema.Version = .init(1, 0, 0)
 }

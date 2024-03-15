@@ -45,6 +45,13 @@ struct DetailBook: View {
                 Label("^[\(count) Quotes](inflect:true)", systemImage: "quote.opening")
             }
 
+            NavigationLink {
+                GenresView(book: book)
+            } label: {
+                let count = book.genres?.count ?? 0
+                Label("^[\(count) Genres](inflect:true)", systemImage: "tag")
+            }
+
 
             Section(header: Text("Synopsis")) {
                 TextEditor(text: $book.synopsis)
@@ -58,6 +65,13 @@ struct DetailBook: View {
 
 #Preview {
     let preview = Preview(Book.self)
-    return DetailBook(book: Book.sampleBooks[4])
-        .modelContainer(preview.container)
+    let books = Book.sampleBooks
+    let genres = Genre.samples
+    preview.addExamples(books)
+    preview.addExamples(genres)
+   // books[4].genres?.append(genres[0])
+    return NavigationStack {
+        DetailBook(book: books[4])
+            .modelContainer(preview.container)
+    }
 }
