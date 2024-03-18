@@ -62,9 +62,16 @@ extension BookListView {
                 VStack(alignment: .leading) {
                     Text(book.title)
                         .font(.headline)
-                    Text(book.author)
-                        .font(.subheadline)
+                        .lineLimit(1)
+                    HStack {
+                        Text(book.author)
+                            .font(.subheadline)
                         .foregroundColor(.secondary)
+                        Spacer()
+                        if book.rating > 0 {
+                            StaticRatingView(rating: book.rating)
+                        }
+                    }
                     if let genres = book.genres {
                         ViewThatFits(in:.horizontal) {
                             GenresStack(genres: genres)
@@ -74,9 +81,6 @@ extension BookListView {
                             .scrollIndicators(.hidden)
                         }
                     }
-                }
-                if book.rating > 0 {
-                    StaticRatingView(rating: book.rating)
                 }
             }
         }

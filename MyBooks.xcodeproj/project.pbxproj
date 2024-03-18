@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		789EDB922BA67DEF000DA0EA /* BookHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789EDB912BA67DEF000DA0EA /* BookHandler.swift */; };
+		789EDB942BA6CDE0000DA0EA /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 789EDB932BA6CDE0000DA0EA /* Launch Screen.storyboard */; };
 		78AABD382B9BE9BF00E604F8 /* MyBooksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AABD372B9BE9BF00E604F8 /* MyBooksApp.swift */; };
 		78AABD3A2B9BE9BF00E604F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AABD392B9BE9BF00E604F8 /* ContentView.swift */; };
 		78AABD3C2B9BE9C200E604F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78AABD3B2B9BE9C200E604F8 /* Assets.xcassets */; };
@@ -26,9 +28,12 @@
 		78AABD612B9E96C000E604F8 /* GenresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AABD602B9E96C000E604F8 /* GenresView.swift */; };
 		78CE707A2BA4152D00C5B993 /* NewGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CE70792BA4152D00C5B993 /* NewGenre.swift */; };
 		78CE707C2BA41DD900C5B993 /* GenresStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CE707B2BA41DD900C5B993 /* GenresStack.swift */; };
+		78CE707E2BA562F700C5B993 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 78CE707D2BA562F700C5B993 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		789EDB912BA67DEF000DA0EA /* BookHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookHandler.swift; sourceTree = "<group>"; };
+		789EDB932BA6CDE0000DA0EA /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		78AABD342B9BE9BF00E604F8 /* MyBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78AABD372B9BE9BF00E604F8 /* MyBooksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBooksApp.swift; sourceTree = "<group>"; };
 		78AABD392B9BE9BF00E604F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -49,6 +54,7 @@
 		78AABD602B9E96C000E604F8 /* GenresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresView.swift; sourceTree = "<group>"; };
 		78CE70792BA4152D00C5B993 /* NewGenre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGenre.swift; sourceTree = "<group>"; };
 		78CE707B2BA41DD900C5B993 /* GenresStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresStack.swift; sourceTree = "<group>"; };
+		78CE707D2BA562F700C5B993 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,9 +68,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		789EDB952BA70227000DA0EA /* previews */ = {
+			isa = PBXGroup;
+			children = (
+				78AABD4D2B9C841700E604F8 /* BookSamples.swift */,
+				78AABD5E2B9E94C000E604F8 /* GenreSamples.swift */,
+				78AABD4F2B9C860A00E604F8 /* PreviewContainer.swift */,
+			);
+			path = previews;
+			sourceTree = "<group>";
+		};
 		78AABD2B2B9BE9BF00E604F8 = {
 			isa = PBXGroup;
 			children = (
+				789EDB932BA6CDE0000DA0EA /* Launch Screen.storyboard */,
+				78CE707D2BA562F700C5B993 /* Localizable.xcstrings */,
 				78AABD362B9BE9BF00E604F8 /* MyBooks */,
 				78AABD352B9BE9BF00E604F8 /* Products */,
 			);
@@ -85,6 +103,7 @@
 				78AABD482B9BF0D600E604F8 /* View */,
 				78AABD472B9BF0C200E604F8 /* Model */,
 				78AABD372B9BE9BF00E604F8 /* MyBooksApp.swift */,
+				789EDB952BA70227000DA0EA /* previews */,
 				78AABD3B2B9BE9C200E604F8 /* Assets.xcassets */,
 				78AABD3D2B9BE9C200E604F8 /* Preview Content */,
 			);
@@ -95,9 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				78AABD3E2B9BE9C200E604F8 /* Preview Assets.xcassets */,
-				78AABD4D2B9C841700E604F8 /* BookSamples.swift */,
-				78AABD5E2B9E94C000E604F8 /* GenreSamples.swift */,
-				78AABD4F2B9C860A00E604F8 /* PreviewContainer.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -106,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				78AABD452B9BEA1F00E604F8 /* Book.swift */,
+				789EDB912BA67DEF000DA0EA /* BookHandler.swift */,
 				78AABD572B9E908000E604F8 /* Genre.swift */,
 				78AABD532B9D8F5500E604F8 /* Quote.swift */,
 			);
@@ -178,6 +195,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 78AABD2B2B9BE9BF00E604F8;
 			productRefGroup = 78AABD352B9BE9BF00E604F8 /* Products */;
@@ -196,6 +214,8 @@
 			files = (
 				78AABD3F2B9BE9C200E604F8 /* Preview Assets.xcassets in Resources */,
 				78AABD3C2B9BE9C200E604F8 /* Assets.xcassets in Resources */,
+				789EDB942BA6CDE0000DA0EA /* Launch Screen.storyboard in Resources */,
+				78CE707E2BA562F700C5B993 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +233,7 @@
 				78CE707A2BA4152D00C5B993 /* NewGenre.swift in Sources */,
 				78AABD612B9E96C000E604F8 /* GenresView.swift in Sources */,
 				78AABD4C2B9C388B00E604F8 /* RatingView.swift in Sources */,
+				789EDB922BA67DEF000DA0EA /* BookHandler.swift in Sources */,
 				78AABD5D2B9E92C400E604F8 /* Color+hex.swift in Sources */,
 				78AABD542B9D8F5500E604F8 /* Quote.swift in Sources */,
 				78CE707C2BA41DD900C5B993 /* GenresStack.swift in Sources */,
@@ -362,6 +383,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -391,6 +413,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

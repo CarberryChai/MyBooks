@@ -28,6 +28,9 @@ class Book {
     @Relationship(inverse:\Genre.books)
     var genres: [Genre]?
 
+    @Attribute(.externalStorage)
+    var bookCover:Data?
+
     init(
         title: String,
         author: String,
@@ -63,7 +66,7 @@ enum Status: Int, Codable, Identifiable, CaseIterable {
     case OnShelf, InProgress, Completed
     var id: Self { self }
 
-    var description: String {
+    var description: LocalizedStringResource {
         switch self {
         case .OnShelf: return "On Shelf"
         case .InProgress: return "In Progress"

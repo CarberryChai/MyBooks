@@ -14,7 +14,7 @@ struct RatingView: View {
             ForEach(1..<6) { index in
                 Image(systemName: index <= rating ? "star.fill" : "star")
                     .resizable()
-                    .frame(width: 20, height: 20)
+                    .frame(width: 15, height: 15)
                     .foregroundColor(index <= rating ? .yellow : .gray)
                     .onTapGesture {
                         rating = rating == index ? 0 : index
@@ -31,7 +31,7 @@ struct StaticRatingView: View {
             ForEach(1..<6) { index in
                 Image(systemName: index <= rating ? "star.fill" : "star")
                     .resizable()
-                    .frame(width: 20, height: 20)
+                    .frame(width: 15, height: 15)
                     .foregroundColor(index <= rating ? .yellow : .gray)
             }
         }

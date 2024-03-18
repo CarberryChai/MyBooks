@@ -21,11 +21,6 @@ struct GenresView: View {
                         .font(.largeTitle)
                 }, description: {
                     Text("You need to create some genres first.")
-                }, actions: {
-                    Button("Create Genre") {
-                        show.toggle()
-                    }
-                    .buttonStyle(.borderedProminent)
                 })
             } else {
                 List {
@@ -44,6 +39,9 @@ struct GenresView: View {
                     }
                     .onDelete(perform: { indexSet in
                         for index in indexSet {
+                            if let bookGenres = book.genres, bookGenres.contains(genres[index]), let idx = bookGenres.firstIndex(of: genres[index]) {
+                                book.genres?.remove(at: idx)
+                            }
                             modelContext.delete(genres[index])
                         }
                     })

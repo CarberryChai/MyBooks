@@ -72,11 +72,10 @@ struct QuotesListView: View {
                     .onDelete(perform: { indexSet in
                         for index in indexSet {
                             let quote = quotes[index]
-                            book.quotes?.forEach { q in
-                                if q.id == quote.id {
-                                    context.delete(quote)
-                                }
+                            if let bookQuotes = book.quotes, let idx = bookQuotes.firstIndex(where: { $0 == quote }){
+                                book.quotes?.remove(at: idx)
                             }
+                            context.delete(quote)
                         }
                     })
                 }

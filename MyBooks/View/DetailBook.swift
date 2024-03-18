@@ -6,11 +6,39 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct DetailBook: View {
     @Bindable var book: Book
+    @State private var selectedCover: PhotosPickerItem?
     var body: some View {
         Form {
+            Section("cover") {
+                if let imageData = book.bookCover {
+                    Image(uiImage: UIImage(data: imageData)!)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxHeight: 100)
+                        .overlay(alignment: .bottomTrailing) {
+                            Button {
+                                book.bookCover = nil
+                                self.selectedCover = nil
+                            } label: {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.white)
+                                    .padding(5)
+                                    .background(Color.black)
+                                    .clipShape(Circle())
+                            }
+                        }
+                } else {
+                    PhotosPicker(selection: $selectedCover, matching: .images, photoLibrary: .shared()) {
+                        Image(systemName: "photo")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                    }
+                }
+            }
             TextField("Book Title", text: $book.title)
             TextField("Author", text: $book.author)
             Picker("Status", selection: $book.status) {
@@ -61,20 +89,25 @@ struct DetailBook: View {
                     QuotesListView(book: book)
                 } label: {
                     let count = book.quotes?.count ?? 0
-                    Label("^[\(count) Quotes](inflect:true)", systemImage: "quote.opening")
+                    Label("\(count) Quotes", systemImage: "quote.opening")
                 }
 
                 NavigationLink {
                     GenresView(book: book)
                 } label: {
                     let count = book.genres?.count ?? 0
-                    Label("^[\(count) Genres](inflect:true)", systemImage: "tag")
+                    Label("\(count) Genres", systemImage: "tag")
                 }
             }
             .padding(.vertical)
             .frame(maxWidth: .infinity)
             .background(.ultraThinMaterial)
             .buttonStyle(.bordered)
+        }
+        .task(id: selectedCover) {
+            if let selectedCover {
+                book.bookCover = try? await selectedCover.loadTransferable(type: Data.self)
+            }
         }
     }
 }

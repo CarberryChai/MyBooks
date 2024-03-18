@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-enum SortOrder: String, CaseIterable, Identifiable {
+enum SortOrder: LocalizedStringResource, CaseIterable, Identifiable {
     case title, author, status
     var id: Self { self }
 }
@@ -24,7 +24,7 @@ struct ContentView: View {
                 Spacer()
                 Picker("", selection: $sortBy) {
                     ForEach(SortOrder.allCases) {
-                        Text($0.rawValue.capitalized)
+                        Text("Sort by \($0.rawValue)")
                             .tag($0)
                     }
                 }
